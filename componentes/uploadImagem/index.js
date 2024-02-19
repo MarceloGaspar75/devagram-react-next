@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export function UploadImagem({
+export default function UploadImagem({
     className = '',
     setImagem,
     imagemPreview,
@@ -21,7 +21,7 @@ export function UploadImagem({
     }
 
     const aoAlterarImagem = () => {
-            if (!referenciaInput?.current?.files?.lenght) {
+            if (!referenciaInput?.current?.files?.lenght <=0) {
             return;
         }
 
