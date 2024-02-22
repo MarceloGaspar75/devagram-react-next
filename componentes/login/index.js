@@ -13,6 +13,14 @@ export default function Login() {
 
     const [email, setEmail] = useState("");
     const [Senha, setSenha] = useState("");
+
+const validarFormulario = () => {
+    return (
+        validarEmail(email)
+        && validarSenha(Senha)
+    );
+}
+
     return (
         <section className={`paginaLogin paginaPublica`}>
             <div className="logoContainer">
@@ -42,7 +50,7 @@ export default function Login() {
                         tipo="password"
                         aoAlterarValor={e => setSenha(e.target.value)}
                         valor={Senha}
-                        mensagemValidacao="NeEcessário mais de 3 caracteres"
+                        mensagemValidacao="Necessário mais de 3 caracteres"
                         exibirMensagemValidacao={Senha && !validarSenha(Senha)}
                     />
                     
@@ -50,7 +58,7 @@ export default function Login() {
                     <Botao
                         texto="Login"
                         tipo="submit"
-                        desabilitado={false}
+                        desabilitado={!validarFormulario()}
                     />
                 </form>
                 <div className="rodapePaginaPublica">

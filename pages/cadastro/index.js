@@ -4,7 +4,8 @@ import Link from "next/link";
 import Botao from "@/componentes/botao";
 import UploadImagem from "@/componentes/uploadImagem";
 import InputPublico from "@/componentes/inputPublico";
-
+import {validarEmail, validarSenha, validarNome, validarConfirmacaoSenha} from "../../utils/validadores";
+import UsuarioService from "@/services/UsuarioService";
 
 import imagemLogo from "../../public/imagens/logo.svg";
 import imagemusUarioAtivo from "../../public/imagens/usuarioAtivo.svg";
@@ -12,7 +13,7 @@ import imagemEnvelope from "../../public/imagens/envelope.svg";
 import imagemChave from "../../public/imagens/chave.svg";
 import imagemAvatar from "../../public/imagens/avatar.svg";
 
-
+const usuarioService = new UsuarioService();
 
 
 
@@ -22,6 +23,46 @@ export default function Cadastro() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
+    const [estaSubmetendo, setEstaSubmetendo] = useState(false);
+
+    const validarFormulario = () => {
+        return (
+            validarNome(nome)
+            && validarEmail(email)
+            && validarSenha(senha)
+            && validarConfirmacaoSenha(senha, confirmacaoSenha)
+        );
+    }
+
+    const aoSubmeter = async (e) => {
+        e.preventDefault();
+        if(!validarFormulario()) {
+            return;
+        }
+
+        setEstaSubmetendo(true);
+
+        try {
+            const corpoReqCadastro = new FormData();
+            corpoReqCadastro.append("nome", nome);
+            corpoReqCadastro.append("email", email);
+            corpoReqCadastro.append("senha", senha);
+
+            if (imagem?.arquivo) {
+                corpoReqCadastro.append("file", imagem.arquivo);
+            }
+
+            await usuarioService.cadastro(corpoReqCadastro);
+            alert("Sucesso!");
+        } catch (error) {
+            alert(
+                "Erro ao cadastrar usuario. " + error?.resposnse?.data?.erro
+            );
+        }
+
+        setEstaSubmetendo(false);
+
+    }
 
 
     return (
@@ -36,7 +77,7 @@ export default function Cadastro() {
             </div>
 
             <div className="conteudoPaginaPublica">
-                <form>
+                <form onSubmit={aoSubmeter}>
                     <UploadImagem
                         imagemPreviewClassName="avatar avatarPreview"
                         imagemPreview={imagem?.preview || imagemAvatar.src}
@@ -49,6 +90,8 @@ export default function Cadastro() {
                         tipo="text"
                         aoAlterarValor={e => setNome(e.target.value)}
                         valor={nome}
+                        mensagemValidacao="Digite pelo menos 2 caracteres"
+                        exibirMensagemValidacao={nome &&!validarNome(nome)}
                     />
 
                     <InputPublico
@@ -57,6 +100,8 @@ export default function Cadastro() {
                         tipo="email"
                         aoAlterarValor={e => setEmail(e.target.value)}
                         valor={email}
+                        mensagemValidacao="O e-mail informado é inválido "
+                        exibirMensagemValidacao={email &&!validarEmail(email)}
                     />
 
                     <InputPublico
@@ -65,6 +110,8 @@ export default function Cadastro() {
                         tipo="password"
                         aoAlterarValor={e => setSenha(e.target.value)}
                         valor={senha}
+                        mensagemValidacao="Digite pelo menos 3 caracteres"
+                        exibirMensagemValidacao={senha &&!validarSenha(senha)}
                     />
 
                     <InputPublico
@@ -73,12 +120,14 @@ export default function Cadastro() {
                         tipo="password"
                         aoAlterarValor={e => setConfirmacaoSenha(e.target.value)}
                         valor={confirmacaoSenha}
+                        mensagemValidacao="As senhas precisam ser iguais"
+                        exibirMensagemValidacao={confirmacaoSenha &&! validarConfirmacaoSenha(senha, confirmacaoSenha)}
                     />
 
                     <Botao
                         texto="Cadastrar"
                         tipo="submit"
-                        desabilitado={false}
+                        desabilitado={!validarFormulario() || estaSubmetendo}
                     />
                 </form>
                 <div className="rodapePaginaPublica">
