@@ -8,17 +8,49 @@ import {validarEmail, validarSenha} from "../../utils/validadores";
 import imagemEnvelope from "../../public/imagens/envelope.svg";
 import imagemChave from "../../public/imagens/chave.svg";
 import imagemLogo from "../../public/imagens/logo.svg";
+import UsuarioService from "../../services/UsuarioService";
+
+const usuarioService = new UsuarioService();
 
 export default function Login() {
 
     const [email, setEmail] = useState("");
     const [Senha, setSenha] = useState("");
+    const [estaSubmetendo, setEstaSubmetendo] = useState(false);
 
 const validarFormulario = () => {
     return (
         validarEmail(email)
         && validarSenha(Senha)
     );
+}
+
+const aoSubmeter = async (e) => {
+    e.preventDefault();
+    if(!validarFormulario()) {
+        return;
+    }
+
+    setEstaSubmetendo(true);
+
+    try {
+        await usuarioService.login({
+            login: email,
+            senha: Senha
+        });
+
+        // TODO: redirecionar o usuário para Home
+        
+    } catch (error) {
+        alert(
+            "Erro ao realizar o login. " + error?.response?.data?.erro
+        );
+        
+    }
+
+    setEstaSubmetendo(false);
+
+
 }
 
     return (
@@ -33,7 +65,7 @@ const validarFormulario = () => {
             </div> 
 
             <div className="conteudoPaginaPublica">
-                <form>
+                <form onSubmit={aoSubmeter}>
                     <InputPublico
                         imagem={imagemEnvelope}
                         texto="E-mail"
@@ -58,7 +90,7 @@ const validarFormulario = () => {
                     <Botao
                         texto="Login"
                         tipo="submit"
-                        desabilitado={!validarFormulario()}
+                        desabilitado={!validarFormulario() || estaSubmetendo}
                     />
                 </form>
                 <div className="rodapePaginaPublica">
