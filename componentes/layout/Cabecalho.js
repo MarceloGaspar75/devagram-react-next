@@ -5,6 +5,7 @@ import Navegacao from './Navegacao';
 import { useState } from 'react';
 import ResultadoPesquisa from './ResultadoPesquisa';
 import UsuarioService from '../../services/UsuarioService';
+import Router, { useRouter } from 'next/router';
 
 const usuarioService = new UsuarioService();
 
@@ -12,8 +13,9 @@ const usuarioService = new UsuarioService();
 export default function Cabecalho() {
     const [resultadoPesquisa, setResultadoPesquisa] = useState([]);
     const [termoPesquisado, setTermoPesquisado] = useState('');
+    const router = useRouter();
 
-    const aoPesquisar = (e) => {
+    const aoPesquisar = async (e) => {
         setTermoPesquisado(e.target.value);
         setResultadoPesquisa([]);
 
@@ -22,40 +24,19 @@ export default function Cabecalho() {
         }
         try {
            const { data } =  await usuarioService.pesquisar(termoPesquisado);
-           console.log(data);
+           setResultadoPesquisa(data);
         } catch (error) {
             alert('Erro ao pesquisar usuario. ' + error?.response?.data?.erro);
         }
 
-        setResultadoPesquisa([
-            {
-                avatar: '',
-                nome: 'Marcelo',
-                email: 'marcelo@devagram.com',
-                _id: '3242432'
-
-            },
-
-            {
-                avatar: '',
-                nome: 'Thais',
-                email: 'thaiso@devagram.com',
-                _id: '3005354'
-
-            },
-
-            {
-                avatar: '',
-                nome: 'Matheus',
-                email: 'matheus@devagram.com',
-                _id: '1109175'
-
-            },
-        ])
+       
     }
 
     const aoClicarResultadoPesquisa = (id) => {
-        console.log('aoClicarResultadoPesquisa', {id} );      
+        console.log('aoClicarResultadoPesquisa', {id} );
+        setResultadoPesquisa([]);
+        setTermoPesquisado('');
+        router.push(`/perfil/${id}`);      
     }
 
     return (
