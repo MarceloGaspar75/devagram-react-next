@@ -39,11 +39,16 @@ export default function Cabecalho() {
         router.push(`/perfil/${id}`);      
     }
 
+    const redirecionarParaHome = () => {
+        router.push('/');
+    }
+
     return (
         <header className='cabecalhoPrincipal'>
             <div className='conteudoCabecalhoPrincipal'>
                 <div className='logoCabecalhoPrincipal'>
                    <Image
+                   onClick={redirecionarParaHome}
                    src={logoHorizontalImg}
                    alt='Logo Devagram'
                    layout='fill'
