@@ -1,11 +1,16 @@
 import {  useEffect, useState, } from "react";
+import FeedService from "../../services/FeedService";
 import Postagem from "./Postagem";
 
-export function Feed({usuarioLogado }) {
+const feedService = new FeedService();
+
+export default function Feed({ usuarioLogado }) {
     const [listaDePostagens, setistaDePostagens] = useState([]);
-    
-    useEffect(() =>{
-        console.log('carregar o feed');
+
+    const pegarDados = async () => {
+        
+        const {data} =await feedService.carregarPostagens();
+
         setistaDePostagens([
             {
                 id: '1',
@@ -49,8 +54,13 @@ export function Feed({usuarioLogado }) {
                     }
                 ]
             },
-        ])
+        ]);
        
+    };
+ 
+    
+    useEffect(() => {
+        pegarDados();
     }, [usuarioLogado]);
 
     return(
@@ -63,5 +73,8 @@ export function Feed({usuarioLogado }) {
                 />
             ))}
         </div>
-    );
+    );      
 }
+
+    
+            
