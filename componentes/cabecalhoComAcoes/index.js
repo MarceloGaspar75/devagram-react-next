@@ -5,18 +5,19 @@ export default function CabecalhoComAcoes({
     iconeEsquerda,
     textoEsquerda = null,
     aoClicarAcaoEsquerda,
+    elementoDireita,
     titulo
 }) {
 
     return (
-        <div className={`cabecalhoComAcoes ${className}`}> 
+        <div className={`cabecalhoComAcoes  ${className}`}> 
             {iconeEsquerda ? (
                 <Image 
                     src={iconeEsquerda}
                     alt='icone esquerda cabecalho ações'
                     onClick={aoClicarAcaoEsquerda}
-                    width={25}
-                    height={25}
+                    width={20}
+                    height={20}
                 />
             ) : (
                 textoEsquerda !== null && (

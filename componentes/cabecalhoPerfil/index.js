@@ -7,31 +7,35 @@ export default function CabecalhoPerfil({
     usuario
 }){
     return (        
-        <div className='cabecalhoPerfil'>
+        <div className='cabecalhoPerfil largura30pctDesktop'>
             <CabecalhoComAcoes
           iconeEsquerda={imgSetaEsquerda}
           titulo={usuario.nome}
           />
+
+        <hr  className='bordaCabecalhoPerfil'/>
+
         <div className='statusPerfil'>
             <Avatar src={usuario.avatar} />
             <div className='informacoesPerfil'>
-                <div className='statusContainer'>
-                    <strong>15</strong>
-                    <span>Publicações</span>
+                <div className='statusContainer'> 
+                    <div className='status'>
+                        <strong>{usuario.publicacoes}</strong>
+                        <span>Publicações</span>
+                    </div>
+                    <div className='status'>
+                        <strong>{usuario.seguidores}</strong>
+                        <span>Seguidores</span>
+                    </div>
+                    <div className='status'>
+                        <strong>{usuario.Seguindo}</strong>
+                        <span>Seguindo</span>
+                    </div>
+                    <Botao 
+                    texto={'Seguir'}
+                    cor='primaria'
+                    />
                 </div>
-                <div className='statusContainer'>
-                    <strong>120</strong>
-                    <span>Seguidores</span>
-                </div>
-                <div className='statusContainer'>
-                    <strong>135</strong>
-                    <span>Seguindo</span>
-                </div>
-                <Botao 
-                texto={'Seguir'}
-                cor='primaria'
-                />
-
             </div>
 
         </div>

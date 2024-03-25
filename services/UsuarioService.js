@@ -26,7 +26,12 @@ export default class UsuarioService extends HttpService {
     }
 
     async pesquisar(termoPesquisado) {
-        return this.get('/pesquisa?filtro=' + termoPesquisado)
+        return this.get('/pesquisa?filtro=' + termoPesquisado);
+    }
+    
+    async obterPerfil(idUsuario) {
+        return this.get(`/pesquisa?id=${idUsuario}`);
+
     }
 
     obterInformacoesDoUsuarioLogado() {
