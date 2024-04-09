@@ -6,7 +6,9 @@ export default function CabecalhoComAcoes({
     textoEsquerda = null,
     aoClicarAcaoEsquerda,
     elementoDireita,
-    titulo
+    titulo,
+    elementoDireita,
+    aoClicarElementoDireita
 }) {
 
     return (
@@ -33,6 +35,7 @@ export default function CabecalhoComAcoes({
                 <button 
                 type='button'
                 className='btnAcaoDireita'
+                onClick={aoClicarElementoDireita}
                 >
                     {elementoDireita}
                 </button>

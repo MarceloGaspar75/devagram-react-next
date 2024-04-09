@@ -92,10 +92,21 @@ body {
   @media screen and (min-width: $desktopBreakpoint) {
     width: 30%;
     margin: auto;
-    
   }
 
 }
+
+.linhaDivisoria{
+  margin: 0 auto;
+  border: none;
+  background-color: $cinza1;
+  height: 1px;
+
+  @media screen and (min-width: $desktopBreakpoint) {
+    margin: 0 auto;
+    width:94%;
+  }
+ }
 
 
 @import '../public/fonts/fonts.scss';
