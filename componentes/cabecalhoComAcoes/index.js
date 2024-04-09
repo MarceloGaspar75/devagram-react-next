@@ -29,9 +29,10 @@ export default function CabecalhoComAcoes({
 
             <h3>{titulo}</h3>
 
-            {elementoDireita && (
+            {elementoDireita  && (
                 <button 
                 type='button'
+                className='btnAcaoDireita'
                 >
                     {elementoDireita}
                 </button>
