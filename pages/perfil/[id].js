@@ -18,15 +18,16 @@ const usuarioService = new UsuarioService();
             ? usuarioLogado.id
             : idUsuario
         );
-            return data;
-         //  setUsuario(data);
+           setUsuario(data);
         } catch (error) {
             alert(`Erro ao obter o perfil do usuário!`);
         }
 
-        const estaNoPerfilPessoal = () => {
-            return router.query.id === 'eu';
-        }
+        
+    }
+
+    const estaNoPerfilPessoal = () => {
+        return router.query.id === 'eu';
     }
    
     useEffect( () => {

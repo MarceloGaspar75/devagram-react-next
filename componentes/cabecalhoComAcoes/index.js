@@ -5,7 +5,6 @@ export default function CabecalhoComAcoes({
     iconeEsquerda,
     textoEsquerda = null,
     aoClicarAcaoEsquerda,
-    elementoDireita,
     titulo,
     elementoDireita,
     aoClicarElementoDireita

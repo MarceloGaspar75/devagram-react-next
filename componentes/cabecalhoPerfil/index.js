@@ -108,7 +108,7 @@ export default function CabecalhoPerfil({
                         <span>Seguidores</span>
                     </div>
                     <div className='status'>
-                        <strong>{usuario.Seguindo}</strong>
+                        <strong>{usuario.seguindo}</strong>
                         <span>Seguindo</span>
                     </div>
                 </div>
