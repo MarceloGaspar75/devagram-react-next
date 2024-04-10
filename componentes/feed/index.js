@@ -9,13 +9,14 @@ export default function Feed({ usuarioLogado, idUsuario }) {
 
     const pegarDados = async () => {
         
-        const {data} =await feedService.carregarPostagens(idUsuario);
+        const {data} = await feedService.carregarPostagens(idUsuario);
 
         const postagensFormatadas = data.map((postagem) => (
             {
-                id: postagem.userId,
+                id: postagem._id,
                 usuario: {
-                    id: postagem.userId,
+                    id: postagem.idUsuario
+                    ,
                     nome: postagem.usuario.nome,
                     avatar: postagem.usuario.avatar
                 },
