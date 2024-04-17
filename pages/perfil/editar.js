@@ -6,11 +6,14 @@ import { useEffect, useState } from 'react';
 import imgAvatarPadrao from '../../public/imagens/avatar.svg';
 import imgLimpar from '../../public/imagens/limpar.svg';
 import UsuarioService from '@/services/UsuarioService';
+import Image  from 'next/image';
+import {validarNome} from '../../utils/validadores';
+
 
 
 const usuarioService = new UsuarioService();
 
-function EditarPerfil() {
+function EditarPerfil(usuarioLogado) {
     const [avatar, setAvatar] = useState();
     const [nome, setNome] = useState('');
     const [inputAvatar, setInputAvatar] = useState();
@@ -49,7 +52,9 @@ function EditarPerfil() {
             router.push('/perfil/eu');
             
         } catch (error) {
+            console.log(error) 
             alert(`Erro ao editar perfil!`);
+            
             
         }
     }

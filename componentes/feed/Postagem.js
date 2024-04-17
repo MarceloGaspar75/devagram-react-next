@@ -15,6 +15,7 @@ const tamanhoLimiteDescricao = 90;
 const feedService = new FeedService();
 
 export default function Postagem({
+    id,
     usuario,
     fotoDoPost,
     descricao,
@@ -91,6 +92,7 @@ export default function Postagem({
                     ]);
                 }
             } catch (e) {
+               
                 alert(`Erro ao alterar a curtida!` + (e?.response?.data?.erro || ''));
             }
         }
@@ -106,7 +108,7 @@ export default function Postagem({
         <div className="postagem">
             <Link href={`/perfil/${usuario.id}`}>
                 <section className="cabecalhoPostagem">
-                    <Avatar src={usuario.Avatar} />
+                    <Avatar src={usuario.avatar} />
                     <strong>{usuario.nome}</strong>
 
                 </section>

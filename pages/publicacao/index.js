@@ -150,7 +150,8 @@ function Publicacao() {
                                     rows={4}
                                     value={descricao}
                                     placeholder="Escreva uma legenda..."
-                                    onChange={e => setDescricao(e.target.value)}
+                                    onChange={escreverDescricao}
+                                    //onChange={e => setDescricao(e.target.value)}
                                 ></textarea>
                             </div>
                             <hr className="linhaDivisoria" />
