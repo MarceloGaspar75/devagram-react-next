@@ -2,24 +2,31 @@
     .cabecalhoPerfil {
         background-color: $branco;
 
-       .bordaCabecalhoPerfil{
-        margin: 0 auto;
-        border: none;
-        background-color: $cinza1;
-        height: 1px;
-       }
+        .bordaCabecalhoPerfil {
+            margin: 0 auto;
+            border: none;
+            background-color: $cinza1;
+            height: 1px;
+        }
+
         .statusPerfil {
             display: flex;
             align-items: center;
             padding: 16px 16px 24px;
 
-            .avatar{
+            .avatar {
                 height: 85px;
                 width: 85px;
                 margin-right: 24px;
+
+                border: solid 3px transparent;
+                background-image: linear-gradient(to bottom, white, white), radial-gradient(circle at top center, $corPrimaria, $corPrimaria3);
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+
             }
 
-            .informacoesPerfil{
+            .informacoesPerfil {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
@@ -31,47 +38,50 @@
                     border-radius: 6px;
                 }
 
-                .statusContainer{
-                    display:flex;
-                    justify-content:space-around;
-                   .status {
-                    text-align:center;
-                    > strong {
-                        display:block;
-                        font-size:14px;
+                .statusContainer {
+                    display: flex;
+                    justify-content: space-around;
+
+                    .status {
+                        text-align: center;
+
+                        >strong {
+                            display: block;
+                            font-size: 14px;
+                        }
+
+                        >span {
+                            display: block;
+                            font-size: 12px;
+                        }
                     }
-                    > span{
-                        display:block;
-                        font-size:12px;
-                    }
-                   }
                 }
 
 
-                
-                
+
+
             }
 
         }
     }
 
     @media screen and (min-width: $desktopBreakpoint) {
-       .cabecalhoPerfil {
-            .cabecalhoComAcoes{
-                > Img {
-                    display:none;
+        .cabecalhoPerfil {
+            .cabecalhoComAcoes {
+                >Img {
+                    display: none;
                 }
             }
 
             .bordaCabecalhoPerfil {
                 margin: 0 auto;
-                width:94%;
+                width: 94%;
             }
 
             .statusPerfil {
                 .avatar {
-                    width:90px;
-                    height:90px;
+                    width: 90px;
+                    height: 90px;
                 }
 
                 .informacoesPerfil {
@@ -80,9 +90,9 @@
                     }
                 }
             }
-       }
+        }
 
-       
+
     }
 }
 
@@ -126,7 +136,7 @@
                 color: $cinza4;
             }
         }
-    } 
+    }
 
     @media screen and (min-width: $desktopBreakpoint) {
         display: flex;
@@ -141,13 +151,13 @@
                     width: 120px;
                     height: 120px;
                 }
+
                 span {
                     font-size: 14px;
                 }
             }
-            .edicaoNome {
-                
-            }
+
+            .edicaoNome {}
         }
     }
 }
