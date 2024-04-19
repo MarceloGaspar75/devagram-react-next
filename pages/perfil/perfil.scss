@@ -157,7 +157,12 @@
                 }
             }
 
-            .edicaoNome {}
+            .edicaoNome {
+                margin: 16px 0px;
+                display: flex;
+                align-items: center;
+                padding: 0px 16px;
+            }
         }
     }
 }
